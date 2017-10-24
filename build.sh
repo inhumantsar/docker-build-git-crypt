@@ -23,6 +23,23 @@ mkdir /tmp/dist || exit 1
 make install PREFIX=/tmp/dist || exit 1
 
 # package
+echo "FPM Options:"
+echo "  -s dir "
+echo "  --force "
+echo "  --chdir /tmp/dist "
+echo "  --output-type rpm "
+echo "  --name git-crypt "
+echo "  --version $FPM_VERSION "
+echo "  --prefix /usr "
+echo "  --package $WORKDIR "
+echo "  --depends git "
+echo "  --license GPLv3 "
+echo "  --vendor \"$VENDOR\" "
+echo "  --maintainer \"$MAINTAINER\" "
+echo "  --url $URL "
+echo "  --description \"$DESCRIPTION\" "
+echo "  --rpm-summary \"$SUMMARY\""
+
 fpm -s dir \
   --force \
   --chdir /tmp/dist \
