@@ -12,4 +12,4 @@ RUN yum install -y \
 
 ADD build.sh /build.sh
 
-ENTRYPOINT [ "/build.sh" ]
+CMD [ "/build.sh" ]
