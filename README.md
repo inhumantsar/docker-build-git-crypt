@@ -2,6 +2,11 @@
 
 Docker image which builds git-crypt and spits out an RPM.
 
+## Tags
+
+* `latest`, `centos` - Produces an RPM with CentOS 7.
+* Broken currently: ~~`win-mingw` - Produces an EXE for Windows (64-bit) w/ MinGW (x86_64).~~
+
 ## Usage
 
 Two ENV vars configure everything:
