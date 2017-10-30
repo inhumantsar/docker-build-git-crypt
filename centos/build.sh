@@ -47,7 +47,7 @@ fpm -s dir \
   --name git-crypt \
   --version $FPM_VERSION \
   --prefix /usr \
-  --package "${WORKDIR}/" \
+  --package "${WORKDIR}/git-crypt-${FPM_VERSION}-1.x86_64.rpm" \
   --depends git \
   --license GPLv3 \
   --vendor "$VENDOR" \
