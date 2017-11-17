@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPS="git gpg libssl-dev"
+DEPS="git gnupg libssl-dev"
 VENDOR='Andrew Ayer <agwa@andrewayer.name>'
 MAINTAINER='Shaun Martin <shaun@samsite.ca>'
 URL='https://github.com/AGWA/git-crypt'
