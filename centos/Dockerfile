@@ -4,6 +4,7 @@ MAINTAINER Shaun Martin <shaun@samsite.ca>
 ENV VERSION=master
 ENV WORKDIR=/workspace
 ENV TARGET=rpm
+ENV GPG=
 
 RUN yum install -y \
       git \

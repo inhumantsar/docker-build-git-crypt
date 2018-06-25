@@ -12,6 +12,20 @@ git-crypt was written by Andrew Ayer (agwa@andrewayer.name). For more informatio
 # use date+time as version if "master" is selected
 [ "$VERSION" == "master" ] && FPM_VERSION="$(date +%Y%m%d%H%M%S)" || FPM_VERSION=$VERSION
 
+# set up signing key if necessary
+if [ "${GPG}" != "" ]; then
+  yum install -y gpg
+  echo "${GPG}" > /tmp/gpgkey
+  gpg --import /tmp/gpgkey
+  GPG_KEYID="$(gpg --with-colons --list-secret-keys | grep -e '^sec' | head -n 1 | cut -d: -f5)"
+  echo """%_signature gpg
+  %_gpg_path /root/.gnupg
+  %_gpg_name ${GPG_KEYID}
+  %_gpgbin /usr/bin/gpg
+  """ > /root/.rpmmacros
+  GPG_SIGNCMD="--rpm-sign"
+fi
+
 # fetch
 git clone --branch $VERSION --single-branch \
   https://github.com/AGWA/git-crypt.git /tmp/git-crypt || exit 1
@@ -40,6 +54,7 @@ echo "  --maintainer \"$MAINTAINER\" "
 echo "  --url $URL "
 echo "  --description \"$DESCRIPTION\" "
 echo "  --rpm-summary \"$SUMMARY\""
+echo "  ${GPG_SIGNCMD}"
 
 fpm -s dir \
   --force \
@@ -56,4 +71,5 @@ fpm -s dir \
   --url $URL \
   --description "$DESCRIPTION" \
   --rpm-summary "$SUMMARY" \
+  ${GPG_SIGNCMD} \
   . || exit 1
